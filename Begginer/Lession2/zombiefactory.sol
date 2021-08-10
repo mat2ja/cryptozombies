@@ -16,8 +16,8 @@ contract ZombieFactory {
 
     mapping (uint => address) public zombieToOwner; /* map of zombie id : owner address */
     mapping (address => uint) ownerZombieCount; /* map of owner address : num of zombies */
-
-    function _createZombie(string memory _name, uint _dna) private {
+    
+    function _createZombie(string memory _name, uint _dna) internal { /* internal so that child contract can access it */
         uint id = zombies.push(Zombie(_name, _dna)) - 1; /* create zombie, add it to list of zombies, get its id (index) */
         zombieToOwner[id] = msg.sender; /* add zombie to map of zombie id:address */
         ownerZombieCount[msg.sender]++; /* increment the count of owner zombies */
