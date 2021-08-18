@@ -1,12 +1,14 @@
 ## Keywords
 
+[Memory vs Storage & When to Use Them](https://medium.com/coinmonks/ethereum-solidity-memory-vs-storage-which-to-use-in-local-functions-72b593c3703a)
+
 - **storage** - where all the contract state variables reside (on the blockchain). Every contract has its own storage and it is persistent between function calls and quite expensive to use
-- **memory** - used to hold temporary values. It is erased between (external) function calls and is cheaper to use
+- **memory** - used to hold temporary values. It erased between (external) function calls and is cheaper to use
 - **stack** - used to hold small local variables
 
 
 
-## Modifiers
+## Visibility modifiers
 
 - **pure** - reads from storage, but doesn't write anything into storage
 - **view** -  doesn't read or write storage
