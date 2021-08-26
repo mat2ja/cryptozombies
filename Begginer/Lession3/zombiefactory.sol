@@ -8,6 +8,7 @@ contract ZombieFactory is Ownable {
 
     uint dnaDigits = 16;
     uint dnaModulus = 10 ** dnaDigits; /* number of possible combinations */
+    uint cooldownTime = 1 days;
 
     struct Zombie {
         string name;
@@ -19,8 +20,8 @@ contract ZombieFactory is Ownable {
     Zombie[] public zombies; /* array of zombies, index is zombie id */
 
     mapping (uint => address) public zombieToOwner; /* map of zombie id : owner address */
-    
     mapping (address => uint) ownerZombieCount; /* map of owner address : num of zombies */
+    
     function _createZombie(string memory _name, uint _dna) internal { /* internal so that child contract can access it */
         uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1; /* create zombie, add it to list of zombies, get its id (index) */
         zombieToOwner[id] = msg.sender; /* add zombie to map of zombie id:address */
@@ -36,6 +37,7 @@ contract ZombieFactory is Ownable {
     function createRandomZombie(string memory _name) public {
         require(ownerZombieCount[msg.sender] == 0); /* allow only if our address hasn't created a zombie yet */
         uint randDna = _generateRandomDna(_name);
+        randDna = randDna - randDna % 100; /* i guess first zobmies end with 00 */
         _createZombie(_name, randDna);
     }
 

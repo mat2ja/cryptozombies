@@ -5,6 +5,7 @@
 - **storage** - where all the contract state variables reside (on the blockchain). Every contract has its own storage and it is persistent between function calls and quite expensive to use
 - **memory** - used to hold temporary values. It erased between (external) function calls and is cheaper to use
 - **stack** - used to hold small local variables
+- **calldata** - similar to memory, but it's only available to external functions.
 
 
 
